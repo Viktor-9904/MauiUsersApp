@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiUsersApp.Views.LoginPage"
+             Title="LoginPage">
+
+    <VerticalStackLayout 
+            Spacing="20" 
+            VerticalOptions="Center" 
+            HorizontalOptions="Center">
+
+        <Label 
+            Text="Email"
+            FontAttributes="Bold"
+            HorizontalOptions="Start"
+            FontSize="20" />
+
+        <Frame 
+            Padding="0"
+            CornerRadius="5"
+            BorderColor="Gray"
+            WidthRequest="300"
+            HeightRequest="50">
+
+            <Entry 
+                Placeholder="Enter your email"
+                Text="{Binding Email}"
+                IsSpellCheckEnabled="False" />
+        </Frame>
+
+        <Label
+            Text="Passowrd"
+            FontAttributes="Bold"
+            HorizontalOptions="Start"
+            FontSize="20" />
+
+        <Frame 
+            Padding="0"
+            CornerRadius="5"
+            BorderColor="Gray"
+            WidthRequest="300"
+            HeightRequest="50">
+
+            <Entry 
+                Placeholder="Password"
+                Text="{Binding Password}"
+                IsSpellCheckEnabled="False"
+                IsPassword="True" />
+        </Frame>
+
+        <Button
+            Text="Login"
+            Clicked="Login_Clicked"
+            IsEnabled="{Binding IsInputValid}"/>
+
+    </VerticalStackLayout>
+</ContentPage>
