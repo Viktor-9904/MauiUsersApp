@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiUsersApp.Views.LoginPage"
-             Title="LoginPage">
+             xmlns:vm="clr-namespace:MauiUsersApp.ViewModels"
+             xmlns:behaviors="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiUsersApp.Views.LoginPage">
+
+    <ContentPage.BindingContext>
+        <vm:LoginPageViewModel />
+    </ContentPage.BindingContext>
 
     <VerticalStackLayout 
             Spacing="20"
             VerticalOptions="Center" 
             HorizontalOptions="Center">
+
+        <Label
+            Text="Login"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            FontSize="38"
+            FontAttributes="Bold"
+            Margin="0,-200,0,80" />
 
         <Label 
             Text="Email"
@@ -25,8 +38,15 @@
             <Entry 
                 Placeholder="Enter your email"
                 Text="{Binding Email}"
-                IsSpellCheckEnabled="False"
-                Unfocused="EmailEntry_Unfocused" />
+                IsSpellCheckEnabled="False">
+
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        EventName="Unfocused"
+                        Command="{Binding EmailUnfocusedCommand}" />
+                </Entry.Behaviors>
+
+            </Entry>
         </Frame>
 
         <Label
@@ -50,11 +70,18 @@
             WidthRequest="300"
             HeightRequest="50">
 
-            <Entry 
+            <Entry
                 Placeholder="Password"
                 Text="{Binding Password}"
-                IsPassword="True"
-                Unfocused="PasswordEntry_Unfocused"/>
+                IsPassword="True">
+
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior
+                        EventName="Unfocused"
+                        Command="{Binding PasswordUnfocusedCommand}" />
+                </Entry.Behaviors>
+                
+            </Entry>
         </Frame>
 
         <Label
@@ -67,8 +94,8 @@
 
         <Button
             Text="Login"
-            Clicked="Login_Clicked"
-            IsEnabled="{Binding IsInputValid}"/>
+            Command="{Binding LoginCommand}"
+            IsEnabled="{Binding IsInputValid}" />
 
     </VerticalStackLayout>
 </ContentPage>
