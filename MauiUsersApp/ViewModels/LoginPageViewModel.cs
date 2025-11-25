@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using MauiUsersApp.Services.Interfaces;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
@@ -7,8 +8,11 @@ namespace MauiUsersApp.ViewModels
 {
     public class LoginPageViewModel : INotifyPropertyChanged
     {
-        public LoginPageViewModel()
+        private readonly IUserService userService;  
+        public LoginPageViewModel(IUserService userService)
         {
+            this.userService = userService;
+
             EmailUnfocusedCommand = new Command(OnEmailUnfocused);
             PasswordUnfocusedCommand = new Command(OnPasswordUnfocused);
             LoginCommand = new Command(OnLogin);
@@ -131,7 +135,20 @@ namespace MauiUsersApp.ViewModels
 
         private async void OnLogin()
         {
-            await Application.Current.MainPage.DisplayAlert("Info", $"Login Button Clicked.\nEmail = {Email}\nPassword={Password}", "OK");
+            bool loginSuccess = await this.userService.LoginAsync(Email, Password);
+            if (loginSuccess)
+            {
+                await Application.Current.MainPage.DisplayAlert("Info", "Logged in successully!", "OK");
+                // todo: navigation
+            }
+            else
+            {
+                EmailErrorMessage = "Invalid Email or Password!";
+                PasswordErrorMessage = "Invalid Email or Password!";
+
+                IsEmailErrorMessageVisible = true;
+                IsPasswordErrorMessageVisible = true;
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
