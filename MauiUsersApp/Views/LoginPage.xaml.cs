@@ -1,11 +1,12 @@
-using System.Text.RegularExpressions;
+using MauiUsersApp.ViewModels;
 
 namespace MauiUsersApp.Views;
 
 public partial class LoginPage : ContentPage
 {
-    public LoginPage()
+    public LoginPage(LoginPageViewModel viewModel)
     {
         InitializeComponent();
+        BindingContext = viewModel;
     }    
 }
