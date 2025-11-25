@@ -1,10 +1,10 @@
-﻿using Microsoft.Data.SqlClient;
-using MauiUsersApp.ViewModels;
-
-using Dapper;
-using MauiUsersApp.Data.Repositories.Interfaces;
+﻿using Dapper;
 using MauiUsersApp.Data.Models;
+using MauiUsersApp.Data.Repositories.Interfaces;
+using MauiUsersApp.ViewModels;
+using Microsoft.Data.SqlClient;
 using Microsoft.Data.Sqlite;
+using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace MauiUsersApp.Data.Repositories
 {
@@ -41,9 +41,21 @@ namespace MauiUsersApp.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> LoginUser(string username, string password)
+        public async Task<bool> LoginUser(string email, string password)
         {
-            throw new NotImplementedException();
+            using var connection = new SqliteConnection($"Data Source={dbPath}");
+            await connection.OpenAsync();
+
+            const string query = @"
+                SELECT COUNT(1)
+                FROM Users
+                WHERE Email = @Email AND Password = @Password;
+            ";
+
+            int count = await connection
+                .ExecuteScalarAsync<int>(query, new { Email = email, Password = password });
+
+            return count > 0;
         }
 
         public Task SaveChangesAsync()
