@@ -4,8 +4,9 @@ namespace MauiUsersApp.Views;
 
 public partial class UsersPage : ContentPage
 {
-	public UsersPage()
+	public UsersPage(UsersPageViewModel viewModel)
 	{
 		InitializeComponent();
+		BindingContext = viewModel;
     }
 }

@@ -14,9 +14,9 @@ namespace MauiUsersApp.Services
             this.userRepository = userRepository;
         }
 
-        public Task ChangeActiveStatusByUserIdAsync(int userId)
+        public async Task ChangeActiveStatusByUserIdAsync(int userId, bool isActive)
         {
-            throw new NotImplementedException();
+            await this.userRepository.ChangeUserActiveStatusByIdAsync(userId, isActive);
         }
 
         public async Task<IEnumerable<UserViewModel>> GetAllUsersAsync()

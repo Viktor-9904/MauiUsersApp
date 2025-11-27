@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiUsersApp.Views.UsersPage"
-             Title="UsersPage">
-    <VerticalStackLayout
-        Spacing="20"
-        VerticalOptions="Center" 
-        HorizontalOptions="Center">
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiUsersApp.Views.UsersPage" >
+
+    <Grid RowDefinitions="Auto, Auto, *, Auto" Padding="20" RowSpacing="10">
 
         <Label
             Text="Users"
@@ -14,6 +12,50 @@
             VerticalOptions="Center"
             FontSize="38"
             FontAttributes="Bold"
-            Margin="0,0,0,0" />
-    </VerticalStackLayout>
+            Grid.Row="0"/>
+
+        <Button Grid.Row="1" Text="Refresh" Command="{Binding RefreshCommand}" BackgroundColor="#0071FF"/>
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Users}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="0,5">
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" Padding="5">
+
+                            <Label 
+                                Grid.Row="0" Grid.Column="0"
+                                Text="{Binding FullName}"
+                                FontAttributes="Bold"
+                                FontSize="16"
+                                VerticalOptions="Center" />
+
+                            <Label 
+                                Grid.Row="1" Grid.Column="0"
+                                Text="{Binding Email}"
+                                FontSize="13"
+                                VerticalOptions="Center" />
+
+                            <Switch 
+                                IsToggled="{Binding IsActive}" />
+
+
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button 
+            Grid.Row="3"
+            Text="+"
+            Command="{Binding EditUserCommand}"
+            WidthRequest="60"
+            HeightRequest="60"
+            CornerRadius="30"
+            BackgroundColor="#0071FF"
+            FontSize="30"
+            FontAttributes="Bold"
+            HorizontalOptions="End" />
+
+    </Grid>
 </ContentPage>
