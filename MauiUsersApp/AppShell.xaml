@@ -8,8 +8,8 @@
     Shell.FlyoutBehavior="Disabled"
     Title="MauiUsersApp">
 
-    <ShellContent 
-        Route="login" 
-        ContentTemplate="{DataTemplate views:LoginPage}" />
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate views:LoginPage}" />
+    <ShellContent Route="UsersPage" ContentTemplate="{DataTemplate views:UsersPage}" />
+    <ShellContent Route="EditUserPage" ContentTemplate="{DataTemplate views:EditUserPage}" />
 
 </Shell>
