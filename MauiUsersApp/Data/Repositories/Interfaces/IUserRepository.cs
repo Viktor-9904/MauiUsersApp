@@ -9,7 +9,7 @@ namespace MauiUsersApp.Data.Repositories.Interfaces
         Task<bool> LoginUser(string username, string password);
         Task AddUserAsync(UserViewModel user);
         Task EditUserAsync(UserViewModel user);
-        Task ChangeUserActiveStatusByIdAsync(int userId);
+        Task ChangeUserActiveStatusByIdAsync(int userId, bool isActive);
         Task SaveChangesAsync();
     }
 }

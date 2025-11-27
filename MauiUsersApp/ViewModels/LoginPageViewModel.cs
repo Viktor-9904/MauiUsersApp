@@ -139,7 +139,7 @@ namespace MauiUsersApp.ViewModels
             if (loginSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert("Info", "Logged in successully!", "OK");
-                // todo: navigation
+                await Shell.Current.GoToAsync("//UsersPage");
             }
             else
             {

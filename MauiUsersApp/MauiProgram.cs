@@ -36,6 +36,9 @@ namespace MauiUsersApp
             builder.Services.AddTransient<LoginPageViewModel>();
             builder.Services.AddTransient<LoginPage>();
 
+            builder.Services.AddTransient<UsersPageViewModel>();
+            builder.Services.AddTransient<UsersPage>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
