@@ -41,7 +41,7 @@ namespace MauiUsersApp.ViewModels
         public ICommand RefreshCommand { get; }
         public ICommand CreateUserCommand { get; }
 
-        private async Task LoadUsersAsync()
+        public async Task LoadUsersAsync()
         {
             if (IsBusy)
             {
