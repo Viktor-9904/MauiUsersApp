@@ -48,7 +48,7 @@
         <Button 
             Grid.Row="3"
             Text="+"
-            Command="{Binding EditUserCommand}"
+            Command="{Binding CreateUserCommand}"
             WidthRequest="60"
             HeightRequest="60"
             CornerRadius="30"

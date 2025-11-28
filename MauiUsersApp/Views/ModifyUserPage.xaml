@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiUsersApp.Views.ModifyUserPage"
+             xmlns:behaviors="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" >
+
+    <VerticalStackLayout 
+        Spacing="20"
+        VerticalOptions="Center"
+        HorizontalOptions="Center">
+
+        <Label
+            Text="{Binding PageTitle}" 
+            HorizontalOptions="Center"
+            FontSize="38"
+            FontAttributes="Bold"
+            Margin="0, 0, 0, 0"
+            Padding="0, 0, 0, 70" />
+
+        <Label 
+            Text="Full Name"
+            FontAttributes="Bold"
+            HorizontalOptions="Start"
+            FontSize="20" />
+
+        <Frame 
+            Padding="0"
+            CornerRadius="5"
+            BorderColor="Gray"
+            WidthRequest="300"
+            HeightRequest="50">
+
+            <Entry 
+                Placeholder="Enter your full name"
+                Text="{Binding SelectedUser.FullName}"
+                IsSpellCheckEnabled="False">
+            </Entry>
+        </Frame>
+
+        <Label 
+            Text="Email"
+            FontAttributes="Bold"
+            HorizontalOptions="Start"
+            FontSize="20" />
+
+        <Frame 
+            Padding="0"
+            CornerRadius="5"
+            BorderColor="Gray"
+            WidthRequest="300"
+            HeightRequest="50">
+
+            <Entry 
+                Placeholder="Enter your email"
+                Text="{Binding SelectedUser.Email}"
+                IsSpellCheckEnabled="False">
+            </Entry>
+        </Frame>
+
+        <Label 
+            Text="Password"
+            FontAttributes="Bold"
+            HorizontalOptions="Start"
+            FontSize="20" />
+
+        <Frame 
+            Padding="0"
+            CornerRadius="5"
+            BorderColor="Gray"
+            WidthRequest="300"
+            HeightRequest="50">
+
+            <Entry 
+                Placeholder="Enter your password"
+                Text="{Binding SelectedUser.Password}"
+                IsSpellCheckEnabled="False"
+                IsPassword="True">
+            </Entry>
+        </Frame>
+
+        <Grid 
+            ColumnDefinitions="*,Auto"
+            WidthRequest="300">
+
+            <Label 
+                Text="Is Active"
+                FontAttributes="Bold"
+                FontSize="20"
+                VerticalOptions="Center"
+                HorizontalOptions="Start" />
+
+            <Switch 
+                Grid.Column="1"
+                IsToggled="{Binding SelectedUser.IsActive}"
+                HorizontalOptions="End" />
+        </Grid>
+
+        <Grid
+            ColumnDefinitions="*,*"
+            ColumnSpacing="20"
+            WidthRequest="300"
+            Margin="0,20,0,0">
+
+            <Button 
+                Text="Cancel"
+                Grid.Column="1"
+                Command="{Binding CancelCommand}"
+                BackgroundColor="DimGrey"/>
+
+            <Button 
+                Text="Save"
+                Grid.Column="0"
+                Command="{Binding SaveCommand}"
+                BackgroundColor="SeaGreen"/>
+
+        </Grid>
+
+    </VerticalStackLayout>
+</ContentPage>

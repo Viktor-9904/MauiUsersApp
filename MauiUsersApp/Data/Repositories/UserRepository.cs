@@ -26,7 +26,20 @@ namespace MauiUsersApp.Data.Repositories
             return await connection.QueryAsync<User>(query);
         }
 
-        public Task AddUserAsync(UserViewModel user)
+        public async Task AddUserAsync(UserViewModel user)
+        {
+            using var connection = new SqliteConnection($"Data Source={dbPath}");
+            await connection.OpenAsync();
+
+            const string query = @"
+                INSERT INTO Users (Name, Email, Password, IsActive)
+                VALUES (@FullName, @Email, @Password, @IsActive);
+            ";
+
+            await connection.ExecuteAsync(query, user);
+        }
+
+        public Task EditUserAsync(UserViewModel user)
         {
             throw new NotImplementedException();
         }
@@ -45,11 +58,6 @@ namespace MauiUsersApp.Data.Repositories
             await connection.ExecuteAsync(query, new { Id = userId, IsActive = isActive });
         }
 
-        public Task EditUserAsync(UserViewModel user)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> LoginUser(string email, string password)
         {
             using var connection = new SqliteConnection($"Data Source={dbPath}");
@@ -65,11 +73,6 @@ namespace MauiUsersApp.Data.Repositories
                 .ExecuteScalarAsync<int>(query, new { Email = email, Password = password });
 
             return count > 0;
-        }
-
-        public Task SaveChangesAsync()
-        {
-            throw new NotImplementedException();
         }
     }
 }

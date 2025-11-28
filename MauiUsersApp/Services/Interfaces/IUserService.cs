@@ -7,6 +7,7 @@ namespace MauiUsersApp.Services.Interfaces
         Task<IEnumerable<UserViewModel>> GetAllUsersAsync();
         Task<bool> LoginAsync(string email, string password);
         Task ChangeActiveStatusByUserIdAsync(int userId, bool isActive);
-        Task<UserViewModel> SaveUserChangesAsync(UserViewModel user);
+        Task AddUserAsync(UserViewModel user);
+        Task UpdateUserAsync(UserViewModel user);
     }
 }

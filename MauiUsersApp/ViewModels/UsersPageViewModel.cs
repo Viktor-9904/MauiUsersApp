@@ -5,6 +5,7 @@ using System.Security.AccessControl;
 using System.Windows.Input;
 
 using MauiUsersApp.Services.Interfaces;
+using MauiUsersApp.Views;
 
 namespace MauiUsersApp.ViewModels
 {
@@ -17,7 +18,7 @@ namespace MauiUsersApp.ViewModels
             this.userService = userService;
 
             RefreshCommand = new Command(async () => await LoadUsersAsync());
-            EditUserCommand = new Command(async () => await EditUserAsync());
+            CreateUserCommand = new Command(async () => await CreateUser());
 
             Users = new ObservableCollection<UserPageItemViewModel>();
 
@@ -38,7 +39,7 @@ namespace MauiUsersApp.ViewModels
         }
 
         public ICommand RefreshCommand { get; }
-        public ICommand EditUserCommand { get; }
+        public ICommand CreateUserCommand { get; }
 
         private async Task LoadUsersAsync()
         {
@@ -66,9 +67,15 @@ namespace MauiUsersApp.ViewModels
             IsBusy = false;
         }
 
-        private async Task EditUserAsync()
+        private async Task CreateUser()
         {
-            await Shell.Current.GoToAsync("//EditUserPage");
+            ModifyUserViewModel user = new ModifyUserViewModel
+            {
+                IsNew = true,
+            };
+
+            await Shell.Current.Navigation.PushAsync(new ModifyUserPage(user, userService));
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

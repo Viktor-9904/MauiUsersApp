@@ -42,7 +42,12 @@ namespace MauiUsersApp.Services
             return await this.userRepository.LoginUser(email, password);
         }
 
-        public Task<UserViewModel> SaveUserChangesAsync(UserViewModel user)
+        public async Task AddUserAsync(UserViewModel user)
+        {
+            await this.userRepository.AddUserAsync(user);
+        }
+
+        public async Task UpdateUserAsync(UserViewModel user)
         {
             throw new NotImplementedException();
         }

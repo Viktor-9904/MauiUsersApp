@@ -15,7 +15,7 @@ namespace MauiUsersApp.ViewModels
 
             EmailUnfocusedCommand = new Command(OnEmailUnfocused);
             PasswordUnfocusedCommand = new Command(OnPasswordUnfocused);
-            LoginCommand = new Command(OnLogin);
+            LoginCommand = new Command(async () => await OnLogin());
         }
 
         private string email;
@@ -133,7 +133,7 @@ namespace MauiUsersApp.ViewModels
             IsPasswordErrorMessageVisible = false;
         }
 
-        private async void OnLogin()
+        private async Task OnLogin()
         {
             bool loginSuccess = await this.userService.LoginAsync(Email, Password);
             if (loginSuccess)
