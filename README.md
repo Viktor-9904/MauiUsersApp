@@ -19,6 +19,37 @@ The app uses **MVVM architecture**, **Shell navigation**, and **Dapper** for dat
 
 ---
 
+
+<table align="center">
+  <tr>
+    <td><img src="README/LoginPage.png" alt="Login Page" width="300"></td>
+    <td><img src="README/UsersPage.png" alt="Users Page" width="300"></td>
+  </tr>
+  <tr>
+    <td><img src="README/AddUserPage.png" alt="Add User Page" width="300"></td>
+    <td><img src="README/EditUserPage.png" alt="Edit User Page" width="300"></td>
+  </tr>
+</table>
+
+---
+
+## Test Accounts for Login
+
+- **Leanne Graham**  
+  - Email: `Sincere@april.biz`  
+  - Password: `password123`
+
+- **Ervin Howell**  
+  - Email: `Shanna@melissa.tv`  
+  - Password: `password123`
+
+- **Clementine Bauch**  
+  - Email: `Nathan@yesenia.net`  
+  - Password: `password123`
+
+
+
+
 ## Requirements
 - .NET 8 SDK
 - Visual Studio 2022
@@ -31,7 +62,7 @@ The app uses **MVVM architecture**, **Shell navigation**, and **Dapper** for dat
 
 1. **Clone the repository**
 ```bash
-git clone [https://github.com/Viktor-9904/UserManagementMauiApp.git](https://github.com/Viktor-9904/MauiUsersApp.git)
+git clone https://github.com/Viktor-9904/MauiUsersApp.git
 cd MauiUsersApp
 ```
 
