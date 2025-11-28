@@ -39,9 +39,22 @@ namespace MauiUsersApp.Data.Repositories
             await connection.ExecuteAsync(query, user);
         }
 
-        public Task EditUserAsync(UserViewModel user)
+        public async Task EditUserAsync(UserViewModel user)
         {
-            throw new NotImplementedException();
+            using var connection = new SqliteConnection($"Data Source={dbPath}");
+            await connection.OpenAsync();
+
+            const string query = @"
+                UPDATE Users
+                SET 
+                    Name = @FullName,
+                    Email = @Email,
+                    Password = @Password,
+                    IsActive = @IsActive
+                WHERE Id = @Id;
+            ";
+
+            await connection.ExecuteAsync(query, user);
         }
 
         public async Task ChangeUserActiveStatusByIdAsync(int userId, bool isActive)

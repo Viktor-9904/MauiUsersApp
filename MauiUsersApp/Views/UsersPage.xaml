@@ -20,6 +20,11 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Padding="10" Margin="0,5">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditUserCommand}" />
+                        </Frame.GestureRecognizers>
+
                         <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" Padding="5">
 
                             <Label 
@@ -36,8 +41,9 @@
                                 VerticalOptions="Center" />
 
                             <Switch 
-                                IsToggled="{Binding IsActive}" />
-
+                                Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                IsToggled="{Binding IsActive}"
+                                InputTransparent="False" />
 
                         </Grid>
                     </Frame>

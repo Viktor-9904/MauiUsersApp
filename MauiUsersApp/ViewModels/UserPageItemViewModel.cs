@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+﻿using MauiUsersApp.Services.Interfaces;
+using MauiUsersApp.Views;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
-using MauiUsersApp.Services.Interfaces;
 
 namespace MauiUsersApp.ViewModels
 {
@@ -14,6 +15,8 @@ namespace MauiUsersApp.ViewModels
         {
             this.userService = userService;
             this.isActive = isActive;
+
+            EditUserCommand = new Command(async () => OnEditUser());
         }
 
         private int id;
@@ -78,15 +81,41 @@ namespace MauiUsersApp.ViewModels
             }
         }
 
+        public ICommand EditUserCommand { get; }
+
+        public async Task OnEditUser()
+        {
+            ModifyUserViewModel user = new ModifyUserViewModel
+            {
+                Id = Id,
+                FullName = FullName,
+                Email = Email,
+                Password = Password,
+                IsActive = IsActive,
+                IsNew = false,
+            };
+
+            await Shell.Current.Navigation.PushAsync(new ModifyUserPage(user, userService));
+        }
+
         public async Task SaveActiveStatus()
         {
             await this.userService.ChangeActiveStatusByUserIdAsync(Id, IsActive);
         }
 
-        public ICommand ToggleActiveStatusCommand { get; }
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string? name = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                return false;
+            }
+
+            string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            return Regex.IsMatch(email, pattern, RegexOptions.IgnoreCase);
+        }
     }
 }

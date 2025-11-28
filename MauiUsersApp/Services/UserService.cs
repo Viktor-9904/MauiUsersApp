@@ -49,7 +49,7 @@ namespace MauiUsersApp.Services
 
         public async Task UpdateUserAsync(UserViewModel user)
         {
-            throw new NotImplementedException();
+            await this.userRepository.EditUserAsync(user);
         }
     }
 }

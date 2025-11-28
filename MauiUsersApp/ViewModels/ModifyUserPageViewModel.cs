@@ -53,15 +53,23 @@ namespace MauiUsersApp.ViewModels
                 return;
             }
 
-            UserViewModel newUser = new UserViewModel()
+            UserViewModel user = new UserViewModel()
             {
+                Id = selectedUser.Id,
                 FullName = selectedUser.FullName,
                 Email = selectedUser.Email,
                 Password = selectedUser.Password,
                 IsActive = selectedUser.IsActive
             };
 
-            await this.userService.AddUserAsync(newUser);
+            if (selectedUser.IsNew)
+            {
+                await this.userService.AddUserAsync(user);
+            }
+            else
+            {
+                await this.userService.UpdateUserAsync(user);
+            }
 
             await Application.Current.MainPage.DisplayAlert("Saved", $"User {SelectedUser.FullName} saved!", "OK");
             await Shell.Current.GoToAsync("..");
